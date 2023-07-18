@@ -2,7 +2,7 @@ import React from "react";
 
 export const Sidebar = () => {
   return (
-    <div className=" w-1/6 min-w-fit  pt-4 rounded-tr-2xl rounded-br-2xl rightShadow lg:px-5">
+    <div className=" min-w-fit  pt-4 rounded-tr-2xl rounded-br-2xl rightShadow lg:px-5">
       <div className="w-full flex justify-start mb-4 pl-9">
         <img src="/zag-logo.svg" />
       </div>

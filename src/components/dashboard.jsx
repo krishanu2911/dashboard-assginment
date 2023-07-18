@@ -4,6 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import DonutChart from "react-donut-chart";
 import { Doughnut } from "react-chartjs-2";
 import { PieChart } from "react-minimal-pie-chart";
+import { useTable } from "../context/tableContext";
 
 ChartJS.register(ArcElement, Legend);
 
@@ -24,16 +25,18 @@ const chartOptions = {
 };
 
 export const Dashboard = () => {
+  const { searchQurey, sortUsers } = useTable();
   return (
-    <div className="w-5/6 px-12 py-8">
+    <div className="w-5/6 px-5 py-8">
       <div className="flex justify-between items-center">
         <h1 className=" text-2xl font-bold">Orders</h1>{" "}
-        <button className=" py-2 px-3 rounded-lg bg-[#1B59F8] text-white">
+        <button className="flex gap-1 py-2 px-3 rounded-lg bg-[#1B59F8] text-white">
+          <img src="/Plus.svg" />
           Add Order
         </button>
       </div>
       <hr className=" mt-9 mb-16 h-0.5 bg-gray-400 opacity-100 dark:opacity-50" />
-      <div className=" flex md:flex-row flex-col gap-4 mb-11">
+      <div className=" relative flex md:flex-row mx-12 flex-col gap-4 mb-11">
         <div className="flex flex-col shadowCard p-8 gap-4 rounded-lg w-3/5">
           <h1 className=" text-xl font-bold">All Customers</h1>
           <div className=" flex justify-around gap-6 flex-wrap">
@@ -133,27 +136,29 @@ export const Dashboard = () => {
             </div>
           </div>
         </div>
+        <img className=" absolute -right-11 -top-11" src="/plus-1.svg" />
       </div>
 
-      <div className="shadowCard rounded-lg px-4">
+      <div className="shadowCard mx-12 rounded-lg px-4">
         <div className="flex items-end justify-between mb-4">
           <h1 className="text-[#16C098]">Active Members</h1>
           <div className="flex items-end gap-2">
             <div className="flex gap-2 mt-4">
-              <div className="primary-bgInput p-1 rounded-lg flex flex-grow">
-                <img src="/search.svg" alt="search-icon" />
+              <div className="primary-bgInput p-1 rounded-lg flex gap-1 flex-grow">
+                <img src="/search.svg" alt="search-icon" className=" w-4" />
                 <input
-                  placeholder="Search anything"
-                  className="primary-bgInput outline-none text-lg max-w-xs"
+                  onChange={(e) => searchQurey(e.target.value)}
+                  placeholder="Search"
+                  className="primary-bgInput outline-none text-[14px] max-w-xs"
                   type="text"
                 />
               </div>
             </div>
-            <div className="flex gap-2 px-3 justify-center items-end p-1 primary-bgInput rounded-lg">
-              <h1>Sort By</h1>{" "}
-              <select className=" outline-none primary-bgInput font-bold">
-                <option>Newest</option>
-                <option>Oldest</option>
+            <div className="flex gap-1 px-3 justify-center items-end p-1 primary-bgInput rounded-lg">
+              <h1 className=" text-[14px]">Sort By :</h1>{" "}
+              <select onChange={(e) => sortUsers(e.target.value)} className=" outline-none primary-bgInput font-bold text-[14px]">
+                <option value={"NEWEST"}>Newest</option>
+                <option value={"OLDEST"}>Oldest</option>
               </select>
             </div>
           </div>
