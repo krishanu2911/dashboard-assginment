@@ -72,12 +72,18 @@ export const DashTable = () => {
                     scope="row"
                     class="px-4 flex justify-center items-center py-4 font-medium whitespace-nowrap text-[14px]"
                   >
+                    {item.isActive ?
                     <div
                       style={{ backgroundColor: "rgba(22, 192, 152, 0.38)" }}
-                      className="  text-[#00B087] border border-[#00B087]  px-3 py-1 rounded-lg bg-[rgba(22, 192, 152, 0.38)]"
+                      className="w-full text-center text-[#00B087] border border-[#00B087]  px-3 py-1 rounded-lg bg-[rgba(22, 192, 152, 0.38)]"
                     >
-                      Hello
-                    </div>
+                      Active
+                    </div> : <div
+                      // style={{ backgroundColor: "rgba(22, 192, 152, 0.38)" }}
+                      className="w-full text-center text-[#DF0404] border border-[#DF0404]  px-3 py-1 rounded-lg bg-[#FFC5C5]"
+                    >
+                      InActive
+                    </div> }
                   </th>
                 </tr>
               );
@@ -100,7 +106,7 @@ export const DashTable = () => {
           </div>
           {numbersArray.map((item) => {
             return (
-              <div onClick={() => setPageNumber(item)} className={`${pageNumber === item && "text-white bg-[#5932EA]"} cursor-pointer px-2 flex justify-center items-center py-1 rounded-lg bg-[#EFF0F6]`}>
+              <div onClick={() => setPageNumber(item)} className={`${pageNumber === item ? "text-white bg-[#5932EA]" : "bg-[#EFF0F6]"} cursor-pointer px-2 flex justify-center items-center py-1 rounded-lg `}>
                 {item}
               </div>
             );

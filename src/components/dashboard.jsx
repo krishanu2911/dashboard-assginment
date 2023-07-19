@@ -1,31 +1,12 @@
 import React from "react";
 import { DashTable } from "./index";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import DonutChart from "react-donut-chart";
-import { Doughnut } from "react-chartjs-2";
 import { PieChart } from "react-minimal-pie-chart";
 import { useTable } from "../context/tableContext";
-
-ChartJS.register(ArcElement, Legend);
-
-const chartData = {
-  datasets: [
-    {
-      data: [85, 15],
-      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-      borderWidth: 15,
-    },
-  ],
-};
-
-const chartOptions = {
-  responsive: true, // Instruct chart js to respond nicely.
-  maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height
-  cutoutPercentage: 70,
-};
+import { chartData } from "../utlis/data"
 
 export const Dashboard = () => {
   const { searchQurey, sortUsers } = useTable();
+  // console.log()
   return (
     <div className="w-5/6 px-5 py-8">
       <div className="flex justify-between items-center">
@@ -47,14 +28,15 @@ export const Dashboard = () => {
               <PieChart
                 lineWidth={20}
                 data={[
-                  { title: "Two", value: 85, color: "#5F27CD" },
-                  { title: "One", value: 15, color: "#E2E2E2" },
+                  { title: "Two", value: Number(chartData.customer.current), color: "#5F27CD" },
+                  { title: "One", value: Number(100 - chartData.customer.current), color: "#E2E2E2" },
                 ]}
               />
               <div className="font-bold text-[#5F27CD] flex justify-center items-end absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                <h1 className="text-xl">85</h1>
+                <h1 className="text-xl">{chartData.customer.current}</h1>
                 <span className=" text-sm">%</span>
               </div>
+              <h1 className="text-center absolute mt-2  text-[12px] w-full text-gray-600">Current Customer</h1>
             </div>
             <div
               className="relative"
@@ -65,19 +47,20 @@ export const Dashboard = () => {
                 data={[
                   {
                     title: "Two",
-                    value: 66,
+                    value:  Number(chartData.customer.new),
                     color: "rgba(22, 192, 152, 0.38)",
                   },
-                  { title: "One", value: 34, color: "#E2E2E2" },
+                  { title: "One", value: Number(100 - chartData.customer.new), color: "#E2E2E2" },
                 ]}
               />
               <div
                 style={{ color: "rgba(22, 192, 152, 0.38)" }}
                 className="font-bold flex justify-center items-end absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 "
               >
-                <h1 className="text-xl">66</h1>
+                <h1 className="text-xl">{chartData.customer.new}</h1>
                 <span className=" text-sm">%</span>
               </div>
+              <h1 className=" text-center absolute mt-2  text-[12px] w-full text-gray-600">New Customer</h1>
             </div>
             <div
               className="relative"
@@ -86,14 +69,15 @@ export const Dashboard = () => {
               <PieChart
                 lineWidth={20}
                 data={[
-                  { title: "Two", value: 90, color: "#FF6B6B" },
-                  { title: "One", value: 10, color: "#E2E2E2" },
+                  { title: "Two", value: Number(chartData.customer.target), color: "#FF6B6B" },
+                  { title: "One", value: Number(100 - chartData.customer.target), color: "#E2E2E2" },
                 ]}
               />
               <div className="font-bold text-[#FF6B6B] flex justify-center items-end absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                <h1 className="text-xl">90</h1>
+                <h1 className="text-xl">{chartData.customer.target}</h1>
                 <span className=" text-sm">%</span>
               </div>
+              <h1 className=" absolute mt-2  text-[12px] w-full text-gray-600">Target Customer</h1>
             </div>
             <div
               className="relative"
@@ -102,14 +86,15 @@ export const Dashboard = () => {
               <PieChart
                 lineWidth={20}
                 data={[
-                  { title: "Two", value: 30, color: "#FFC5C5" },
-                  { title: "One", value: 70, color: "#E2E2E2" },
+                  { title: "Two", value: Number(chartData.customer.retarget), color: "#FFC5C5" },
+                  { title: "One", value: Number(100 - chartData.customer.retarget), color: "#E2E2E2" },
                 ]}
               />
               <div className="font-bold text-[#FFC5C5] flex justify-center items-end absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                <h1 className="text-xl">30</h1>
+                <h1 className="text-xl">{chartData.customer.retarget}</h1>
                 <span className=" text-sm">%</span>
               </div>
+              <h1 className=" absolute mt-2  text-[12px] w-full text-gray-600">RetargetCustomer</h1>
             </div>
           </div>
         </div>
@@ -119,9 +104,9 @@ export const Dashboard = () => {
             <h2 className="text-[#A7A7A7] font-semibold">Active</h2>
             <div className=" relative">
               <div className=" h-3 w-full rounded-lg bg-[#EEEEEE]"></div>
-              <div className="h-3 w-[63%] rounded-lg bg-[#16C098] absolute top-0"></div>
+              <div className={`h-3 w-[63%] rounded-lg bg-[#16C098] absolute top-0`}></div>
               <h1 className=" absolute right-0 font-semibold text-[#A7A7A7]">
-                63%
+                {chartData.stat.active}%
               </h1>
             </div>
           </div>
@@ -129,9 +114,9 @@ export const Dashboard = () => {
             <h2 className="text-[#A7A7A7] font-semibold">Active</h2>
             <div className=" relative">
               <div className=" h-3 w-full rounded-lg bg-[#EEEEEE]"></div>
-              <div className="h-3 w-[88%] rounded-lg bg-[#FF6B6B] absolute top-0"></div>
+              <div className={`h-3 w-[88%] rounded-lg bg-[#FF6B6B] absolute top-0`}></div>
               <h1 className=" absolute right-0 font-semibold text-[#A7A7A7]">
-                88%
+                {chartData.stat.inActive}%
               </h1>
             </div>
           </div>

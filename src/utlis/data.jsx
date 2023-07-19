@@ -14,7 +14,7 @@ export const userData = [
     phoneNumber: "(123) 456-7890",
     email: "john@apple.com",
     country: "United States",
-    isActive: true,
+    isActive: false,
     timeStamp: 1674048000,
   },
   {
@@ -23,7 +23,7 @@ export const userData = [
     phoneNumber: "(987) 654-3210",
     email: "alice@google.com",
     country: "United States",
-    isActive: true,
+    isActive: false,
     timeStamp: 1674056700,
   },
   {
@@ -59,7 +59,7 @@ export const userData = [
     phoneNumber: "(222) 333-4444",
     email: "sarah@amazon.com",
     country: "United States",
-    isActive: true,
+    isActive: false,
     timeStamp: 1674079200,
   },
   {
@@ -86,7 +86,7 @@ export const userData = [
     phoneNumber: "(111) 222-3333",
     email: "ethan@microsoft.com",
     country: "United States",
-    isActive: true,
+    isActive: false,
     timeStamp: 1674102600,
   },
   {
@@ -198,3 +198,16 @@ export const userData = [
     timeStamp: 1674167400,
   },
 ];
+
+export const chartData = {
+  customer: {
+    current: 85,
+    new: 66,
+    target: 90,
+    retarget: 30,
+  },
+  stat: {
+    active: 63,
+    inActive: 88
+  }
+};
